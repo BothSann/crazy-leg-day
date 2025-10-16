@@ -1,2 +1,19 @@
-[Libraries]
-[Libraries]/
+# Build generated
+Build/
+Builds/
+
+# Unity generated
+Library/
+obj/
+Temp/
+Logs/
+MemoryCaptures/
+
+# User-specific
+.vscode/
+.vs/
+*.userprefs
+/Library/
+/[Ll]ocal[Cc]ache/
+/[Tt]emp/
+/[Uu]ser[Ss]ettings/
