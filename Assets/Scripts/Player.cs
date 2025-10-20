@@ -3,39 +3,48 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Animator animator;
+
     [Header("Movement Info")]
-    public float moveSpeed;
-    public float jumpForce;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
+    private bool runBegin;
 
 
     [Header("Collision Info")]
-    public float groundCheckDistance;
-    public LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask groundLayer;
     private bool isGrounded;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+        if(runBegin) 
+            rb.linearVelocity = new Vector2(moveSpeed * 2, rb.linearVelocity.y);
+        
         CheckCollision();
         CheckInput();
     }
-    
+
     private void CheckCollision()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
     }
-
+ 
     private void CheckInput() 
     {
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+            runBegin = true;
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
