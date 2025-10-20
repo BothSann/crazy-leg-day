@@ -16,5 +16,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
     }
 }
