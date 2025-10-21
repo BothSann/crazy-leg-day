@@ -10,8 +10,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
 
-    private bool isRunning;
-    private bool runBegin;
+
+    private bool playerUnlocked;
 
 
     [Header("Collision Info")]
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     {
         AnimatorController();
 
-        if (runBegin)
+        if (playerUnlocked)
             rb.linearVelocity = new Vector2(moveSpeed * 2, rb.linearVelocity.y);
 
         CheckCollision();
@@ -41,9 +41,8 @@ public class Player : MonoBehaviour
 
     private void AnimatorController()
     {
-        isRunning = rb.linearVelocity.x != 0;
-        animator.SetBool("isRunning", isRunning);
         animator.SetBool("isGrounded", isGrounded);
+        animator.SetFloat("xVelocity", rb.linearVelocity.x);
         animator.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
@@ -56,7 +55,7 @@ public class Player : MonoBehaviour
     {
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
-            runBegin = true;
+            playerUnlocked = true;
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
