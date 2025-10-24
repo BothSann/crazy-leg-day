@@ -1,33 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ParallaxBackground : MonoBehaviour
 {
-    private GameObject camera;
+    private GameObject cam;
+
     [SerializeField] private float parallaxEffect;
+
     private float length;
-    private float xPos;
+    private float xPosition;
+
     void Start()
     {
-        camera = GameObject.Find("Main Camera");
+        cam = GameObject.Find("Main Camera");
+
         length = GetComponent<SpriteRenderer>().bounds.size.x;
-        xPos = transform.position.x;
+        xPosition = transform.position.x;
+
+
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        float distanceMoved = (camera.transform.position.x * (1 - parallaxEffect));
-        float distanceToMove = (camera.transform.position.x * parallaxEffect);
+        float distanceMoved = cam.transform.position.x * (1 - parallaxEffect);
+        float distanceToMove = cam.transform.position.x * parallaxEffect;
 
-        transform.position = new Vector3(xPos + distanceToMove, transform.position.y);
+        transform.position = new Vector3(xPosition + distanceToMove, transform.position.y);
 
-        if (distanceMoved > xPos + length)
+        if (distanceMoved > xPosition + length)
         {
-            xPos += length;
-        }
-        else if (distanceMoved < xPos - length)
-        {
-            xPos -= length; 
+            xPosition = xPosition + length;
         }
     }
 }

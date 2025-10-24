@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Transform[] levelPart;
-    [SerializeField] private Vector3 nextLevelPartPosition;
+    [SerializeField] private Vector3 nextPartPosition;
+
+    [SerializeField] private float distanceToSpawn;
     [SerializeField] private float distanceToDelete;
-    [SerializeField] private float distanceToGenerate;
     [SerializeField] private Transform player;
 
 
-    // Update is called once per frame
+
     void Update()
     {
         DeletePlatform();
@@ -19,28 +19,29 @@ public class LevelGenerator : MonoBehaviour
 
     private void GeneratePlatform()
     {
-        while (Vector2.Distance(player.transform.position, nextLevelPartPosition) < distanceToGenerate)
+        while (Vector2.Distance(player.transform.position,nextPartPosition) < distanceToSpawn)
         {
-            Transform randomLevelPart = levelPart[Random.Range(0, levelPart.Length)];
+            Transform part = levelPart[Random.Range(0, levelPart.Length)];
 
-            Vector2 newPosition = new Vector2(nextLevelPartPosition.x - randomLevelPart.Find("StartPoint").position.x, 0);
 
-            Transform newLevelPart = Instantiate(randomLevelPart, newPosition, transform.rotation, transform);
+            Vector2 newPosition = new Vector2(nextPartPosition.x - part.Find("StartPoint").position.x, 0);
 
-            nextLevelPartPosition = newLevelPart.Find("EndPoint").position;
+            Transform newPart = Instantiate(part, newPosition, transform.rotation, transform);
+
+            nextPartPosition = newPart.Find("EndPoint").position;
+
         }
     }
 
     private void DeletePlatform()
     {
-        if(transform.childCount > 0) 
+        if (transform.childCount > 0)
         {
             Transform partToDelete = transform.GetChild(0);
 
-            if(Vector2.Distance(player.transform.position, partToDelete.position) > distanceToDelete)
-            {
+            if (Vector2.Distance(player.transform.position, partToDelete.transform.position) > distanceToDelete)
                 Destroy(partToDelete.gameObject);
-            }
+
         }
     }
-}   
+}

@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 3
+  serializedVersion: 2
   tags: []
   layers:
   - Default
@@ -11,10 +11,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Traps
+  - Coins
+  - Enemy
   - 
   - 
   - 
@@ -42,19 +42,17 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-    uniqueID: 3840483401
+    uniqueID: 4118125155
     locked: 0
   - name: Platform
-    uniqueID: 2706210245
+    uniqueID: 1677681603
     locked: 0
   - name: Collectable
-    uniqueID: 2403396753
+    uniqueID: 2557056627
     locked: 0
   - name: Enemy
-    uniqueID: 3298072621
+    uniqueID: 321855215
     locked: 0
   - name: Player
-    uniqueID: 3116389677
+    uniqueID: 3667014643
     locked: 0
-  m_RenderingLayers:
-  - Default
