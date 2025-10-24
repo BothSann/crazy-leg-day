@@ -20,4 +20,5 @@ MemoryCaptures/
 
 # Visual Studio
 *.sln
+*.slnx
 *.csproj
